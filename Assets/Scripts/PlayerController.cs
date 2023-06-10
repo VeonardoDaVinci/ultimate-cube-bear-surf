@@ -33,23 +33,34 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             ScoreManager.Instance.AddScore(1);
-            for (int i = 0; i < other.gameObject.GetComponent<GatherController>().GatherAmount; i++)
-            {
-                character.transform.position += new Vector3(0, 1.1f, 0);
-                GameObject element = Instantiate(towerElement, character.transform.position - new Vector3(0, 1.1f, 0), character.transform.rotation, transform);
-                towerElements.Add(element.GetComponent<TowerElementController>());
-                character.transform.position = new Vector3(transform.position.x, character.transform.position.y, transform.position.z);
-            }
-            foreach(var x in towerElements)
-            {
-                x.transform.position = new Vector3(transform.position.x, x.transform.position.y, transform.position.z);
-            }
+
+            InstantiateTowerElements(other);
+            AlignTowerElements();
         }
 
         if (other.gameObject.CompareTag("Score"))
         {
             Destroy(other.gameObject);
             ScoreManager.Instance.AddScore(10);
+        }
+    }
+
+    private void AlignTowerElements()
+    {
+        foreach (var x in towerElements)
+        {
+            x.transform.position = new Vector3(transform.position.x, x.transform.position.y, transform.position.z);
+        }
+    }
+
+    private void InstantiateTowerElements(Collider other)
+    {
+        for (int i = 0; i < other.gameObject.GetComponent<GatherController>().GatherAmount; i++)
+        {
+            character.transform.position += new Vector3(0, 1.1f, 0);
+            GameObject element = Instantiate(towerElement, character.transform.position - new Vector3(0, 1.1f, 0), character.transform.rotation, transform);
+            towerElements.Add(element.GetComponent<TowerElementController>());
+            character.transform.position = new Vector3(transform.position.x, character.transform.position.y, transform.position.z);
         }
     }
 
