@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour
 
     public int CurrentScore = 0;
     public int AllTimeScore = 0;
-
+    private int ScoreWhenAdded = 0;
     void Awake()
     {
         if (!Instance)
@@ -34,7 +34,8 @@ public class ScoreManager : MonoBehaviour
 
     public void AddAllTimeScore()
     {
-        AllTimeScore += CurrentScore;
+        AllTimeScore += CurrentScore - ScoreWhenAdded;
+        ScoreWhenAdded = CurrentScore;
         PlayerPrefs.SetInt("score", AllTimeScore);
     }
 }

@@ -9,7 +9,11 @@ public class StartButtonController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buttonText;
     void Start()
     {
-        if(LevelManager.Instance.CurrentLevelIndex == -1)
+        if (LevelManager.Instance.HasLost)
+        {
+            buttonText.text = "Restart";
+        }
+        else if(LevelManager.Instance.CurrentLevelIndex == -1)
         {
             buttonText.text = "Start";
         }

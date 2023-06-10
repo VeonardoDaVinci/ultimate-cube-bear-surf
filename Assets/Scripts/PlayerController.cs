@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         if(count > towerElements.Count)
         {
+            LevelManager.Instance.HasLost = true;
             LevelManager.Instance.LoadMainMenu();
             LevelManager.Instance.CurrentLevelIndex--;
             ScoreManager.Instance.AddAllTimeScore();

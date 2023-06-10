@@ -13,7 +13,6 @@ public class RotationController : MonoBehaviour
         {
             Destroy(this.gameObject);
             level.transform.DORotate(new Vector3(0, level.transform.eulerAngles.y + 90f, 0), 1f);
-            //player.transform.DORotate(new Vector3(0, player.transform.eulerAngles.y - 90f, 0), 1f);
         }
     }
 }
